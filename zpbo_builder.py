@@ -11,14 +11,6 @@
         email                : mohannad.adm@gmail.com
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 """
 
 import PyQt4
@@ -122,21 +114,7 @@ class ZpboBuilder:
         Button_remove = self.dlg.findChild(QPushButton, "pushButton_remove")  
         QObject.connect(Button_remove, SIGNAL("clicked()"), self.remove_temp_layers)
 
-        # # Connect the button "pushButton_fibres_utiles"
-        # Button_fibres_utiles = self.dlg.findChild(QPushButton, "pushButton_fibres_utiles")
-        # QObject.connect(Button_fibres_utiles, SIGNAL("clicked()"), self.calcul_fibres_utiles)
 
-        # # Connect the button "pushButton_"
-        # Button_dimensios = self.dlg.findChild(QPushButton, "pushButton_dimensions")
-        # QObject.connect(Button_dimensios, SIGNAL("clicked()"), self.calcul_boite_dimensions)
-
-        # # Connect the butoon "pushButton_mettre_a_jour_chemin"
-        # Button_verify_capacity = self.dlg.findChild(QPushButton, "pushButton_verify_capacity")
-        # QObject.connect(Button_verify_capacity, SIGNAL("clicked()"), self.verify_capacite_chambre)
-
-        # # Connect the button "pushButton_mettre_a_jour_ebp"
-        # Button_mettre_a_jour_ebp = self.dlg.findChild(QPushButton, "pushButton_mettre_a_jour_ebp")
-        # QObject.connect(Button_mettre_a_jour_ebp, SIGNAL("clicked()"), self.update_p_ebp)
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -167,8 +145,6 @@ class ZpboBuilder:
         parent=None):
 
 
-        # Create the dialog (after translation) and keep reference
-        # self.dlg = BoiteDimensioningDialog()
 
         icon = QIcon(icon_path)
         action = QAction(icon, text, parent)
@@ -216,161 +192,7 @@ class ZpboBuilder:
         # remove the toolbar
         del self.toolbar
 
-
-    # def run(self):
-    #     """Run method that performs all the real work"""
-    #     # get a list of all the layers in the map canvas
-    #     layers = self.iface.legendInterface().layers()
-
-    #     # reset all the comboboxes
-    #     self.dlg.ui.combo_zpbo.clear()
-    #     self.dlg.ui.combo_zsro.clear()
-    #     self.dlg.ui.combo_t_noeud.clear() 
-
-    #     # add the names of the layers to the comboboxes
-    #     for layer in layers:
-    #         self.dlg.ui.combo_zpbo.addItem(layer.name())
-    #         self.dlg.ui.combo_zsro.addItem(layer.name())
-    #         self.dlg.ui.combo_t_noeud.addItem(layer.name())
-
-    #     # show the dialog
-    #     self.dlg.show()
-    #     # Run the dialog event loop
-    #     result = self.dlg.exec_()
-    #     # See if OK was pressed
-    #     if result:
-    #         # Do something useful here - delete the line containing pass and
-    #         # substitute with your code.
-    #         # print self.dlg.ui.density_spinbox.text()
-    #         print type(self)
-    #         print type(self.dlg)
-    #         print type(self.dlg.ui)
-    #         print type(self.dlg.ui.density_spinbox)
-    #         print "zpbo: " + self.dlg.ui.combo_zpbo.currentText()
-    #         print "zsro: " + self.dlg.ui.combo_zsro.currentText()
-    #         print "t_noeud: " + self.dlg.ui.combo_t_noeud.currentText()
-    #         print self.dlg.ui.density_spinbox.text()
-
-    #         zpbo_name = self.dlg.ui.combo_zpbo.currentText()
-    #         zsro_name = self.dlg.ui.combo_zsro.currentText()
-    #         t_noeud_name = self.dlg.ui.combo_t_noeud.currentText()
-
-    #         # The script
-
-    #         import processing
-
-    #         # Define the necissary layers
-
-    #         zpbo = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName(zpbo_name)[0]
-    #         t_noeud = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName(zsro_name)[0]
-    #         zsro = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName(t_noeud_name)[0]
-
-    #         temp = "D:/Mohannad/NRO101_temp_test/"
-
-    #         # select only the nodes within zpbo
-    #         processing.runalg("qgis:selectbylocation", t_noeud, zpbo, ['intersects'], 0, 0)
-
-    #         # Generate random points within zpbo polygons
-    #         processing.runalg("qgis:randompointsinsidepolygonsfixed", zpbo, 1, 0.1, 0.5, temp + "random_points.shp")
-
-    #         # Load random points into the map
-    #         random_points = self.iface.addVectorLayer(temp + "random_points.shp", "random_points", "ogr")
-    #         if not random_points :
-    #             print "random_points.shp failed to load"
-
-             
-    #         # Union the random points with t_noeud
-    #         processing.runalg("qgis:union", random_points, t_noeud, temp + "union_random_t_noeud.shp")
-
-
-    #         # Load the union layer into the map
-    #         union = self.iface.addVectorLayer(temp + "union_random_t_noeud.shp", "union_random_t_noeud", "ogr")
-    #         if not union :
-    #             print "union_random_t_noeud.shp failed to load"
-                
-
-    #         # Delete the fields of t_noeud from the union layer
-    #         for i in range(len(union.fields()) + 1):
-    #             res = union.dataProvider().deleteAttributes([0])
-    #             union.updateFields()
-                
-
-    #         # Get the extent of the union layer
-    #         ext = union.extent()
-    #         (xmax, xmin, ymax, ymin) = (ext.xMaximum(), ext.xMinimum(), ext.yMaximum(), ext.yMinimum())
-    #         print "extent : " + str((xmax, xmin, ymax, ymin))
-
-
-    #         # create two new points
-    #         feat1 = qgis.core.QgsFeature(union.fields())
-    #         feat1x = xmax + (xmax - xmin) 
-    #         feat1y = ymin - (ymax - ymin)
-    #         feat1.setGeometry(qgis.core.QgsGeometry.fromPoint(qgis.core.QgsPoint(feat1x, feat1y)))
-
-    #         feat2 = qgis.core.QgsFeature(union.fields())
-    #         feat2x = xmin - (xmax - xmin)
-    #         feat2y = ymax + (ymax - ymin)
-    #         feat2.setGeometry(qgis.core.QgsGeometry.fromPoint(qgis.core.QgsPoint(feat2x, feat2y)))
-
-    #         # create a memory layer to hold the two points
-
-    #         extend_lyr = qgis.core.QgsVectorLayer("Point?crs=epsg:2154", "extend_lyr", "memory")
-    #         pr = extend_lyr.dataProvider()
-    #         pr.addFeatures([feat1, feat2])
-    #         fields = pr.fields()
-    #         extend_lyr.updateExtents()
-
-    #         # write the memory layer to the disk (We had a problem when trying to union the memory layer with the union layer)
-    #         # problem solved
-    #         error = qgis.core.QgsVectorFileWriter.writeAsVectorFormat(extend_lyr, temp + "extend_lyr.shp", "utf-8", None, "ESRI Shapefile")
-    #         if error == qgis.core.QgsVectorFileWriter.NoError:
-    #             print("success!")
-
-
-    #         # union the union layer with the memory layer
-    #         # processing.runalg("qgis:union", union, extend_lyr, temp + "union_extended.shp")
-
-
-    #         # load the newly saved layer
-    #         extend_lyr = self.iface.addVectorLayer(temp + "extend_lyr.shp", "extend_layer", "ogr")
-
-    #         # union the union layer with the memory layer
-    #         processing.runalg("qgis:union", union, extend_lyr, temp + "union_extended.shp")
-
-    #         # load the new layer
-    #         union_extended = self.iface.addVectorLayer(temp + "union_extended.shp", "union_extended", "ogr")
-
-    #         # spatially join the point layer with zpbo
-    #         union_joined = processing.runalg("qgis:joinattributesbylocation", union_extended, zpbo, u'intersects', 0, 0, 'mean', 1, temp + "union_points_joined.shp")
-
-    #         # load the joined layer
-    #         union_joined = self.iface.addVectorLayer(temp + "union_points_joined.shp", "union_joined", "ogr")
-
-    #         # We had a problem with join by location tool, so we will depend temporarely on a layer created manually
-    #         #voronoi = processing.runalg("qgis:voronoipolygons", temp + "union_points_joined_manual.shp", 0, temp + "voronoi.shp")
-
-    #         # create Voronoi polygons
-    #         voronoi = processing.runalg("qgis:voronoipolygons", union_joined, 0, temp + "voronoi.shp")
-
-    #         # load voronoi layer
-    #         voronoi = self.iface.addVectorLayer(temp + "voronoi.shp", "voronoi", "ogr")
-
-    #         # dissolve voronoi polygons on the basis of zp_id
-    #         processing.runalg("qgis:dissolve", voronoi, False, "zp_id", temp + "voronoi_dissolved.shp")
-
-    #         # load voronoi dissolved layer
-    #         voronoi_dissolved = self.iface.addVectorLayer(temp + "voronoi_dissolved.shp", "voronoi_dissolved", "ogr")
-
-    #         # clip the dissolved layer by zsro polygon
-    #         processing.runalg("qgis:clip", voronoi_dissolved, zsro, temp + "zpbo_final_zs_1")
-
-    #         # add the clipped layer
-    #         zpbo_final_zsro_1 = self.iface.addVectorLayer(temp + "zpbo_final_zs_1.shp", "zpbo_final_zsro_1", "ogr")
-
-    #         # delete the field "FID" from the final layer
-    #         res = zpbo_final_zsro_1.dataProvider().deleteAttributes([0])
-    #         zpbo_final_zsro_1.updateFields()
-                
+                  
 
     def run(self):
         """Run method that performs all the real work"""
@@ -518,21 +340,10 @@ class ZpboBuilder:
                 self.dlg.findChild(QComboBox,"comboBox_zsro").setEnabled(True)
                 self.dlg.findChild(QComboBox,"comboBox_zpbo").setEnabled(True)
                 self.dlg.findChild(QComboBox,"comboBox_noeud").setEnabled(True)
-                # self.dlg.findChild(QComboBox, "comboBox_ebp").setEnabled(True)
-                # self.dlg.findChild(QComboBox, "comboBox_ptech").setEnabled(True)
                 self.dlg.findChild(QComboBox, "comboBox_zs_refpm").setEnabled(True)
                 self.dlg.findChild(QPushButton, "pushButton_verification").setEnabled(True)
                 self.dlg.findChild(QPushButton, "pushButton_remove").setEnabled(True)
-                # self.dlg.findChild(QPushButton, "pushButton_orientation").setEnabled(True)
-                # self.dlg.findChild(QPushButton, "pushButton_verifier_orientation").setEnabled(True)
 
-                # self.dlg.findChild(QPushButton, "pushButton_fibres_utiles").setEnabled(True)
-                # self.dlg.findChild(QPushButton, "pushButton_dimensions").setEnabled(True)
-                # self.dlg.findChild(QPushButton, "pushButton_verify_capacity").setEnabled(True)
-                # self.dlg.findChild(QPushButton, "pushButton_mettre_a_jour_ebp").setEnabled(True)
-
-                # self.dlg.findChild(QPushButton, "pushButton_mettre_a_jour_chemin")
-                # self.dlg.findChild(QPushButton, "pushButton_mettre_a_jour_cable").setEnabled(True)
                 # Disable connection button
                 self.dlg.findChild(QPushButton, "pushButton_connexion").setEnabled(False)
 
@@ -543,25 +354,12 @@ class ZpboBuilder:
                 
                 # 2 - in prod
                 self.remplir_menu_deroulant_reference(self.dlg.comboBox_zpbo, ("SELECT tablename as table_lise FROM pg_tables WHERE schemaname = '"+self.dlg.Schema_grace.text()+"' ;"), 't_zpbo')
-                # self.remplir_menu_deroulant_reference(self.dlg.comboBox_ebp, ("SELECT tablename as table_lise FROM pg_tables WHERE schemaname = '"+self.dlg.Schema_prod.text()+"' ;"), 'p_ebp')
-                # self.remplir_menu_deroulant_reference(self.dlg.comboBox_ptech, ("SELECT tablename as table_lise FROM pg_tables WHERE schemaname = '"+self.dlg.Schema_prod.text()+"' ;"), 'p_ptech') 
-                # self.fenetreMessage(QMessageBox.Warning,"Query for zs_refpm", "SELECT zs_refpm FROM " + self.dlg.Schema_grace.text() + ".t_zsro;")
-                # result = self.executerRequette("SELECT zs_refpm FROM " + self.dlg.Schema_grace.text() + ".t_zsro;", True)
-                # for elm in result:
-                #     print elm[0]
-                #     self.fenetreMessage(QMessageBox.Warning,"result of query", elm[0])
 
                 # 3 - ZSRO (zs_refpm)
                 self.remplir_menu_deroulant_reference(self.dlg.comboBox_zs_refpm, ("SELECT zs_refpm as refpm FROM " + self.dlg.Schema_prod.text() + ".p_zsro ;"), 'PMT_26325_FO01')
 
-                # print "SELECT zs_refpm FROM " + self.dlg.Schema_grace.text() + ".t_zsro;"
-
-
                 print "Schema found"
-                # self.dlg2.findChild(QPushButton,"pushButton_controle_avt_migration").setEnabled(True)
             else:
-                # self.dlg2.findChild(QPushButton,"pushButton_controle_avt_migration").setEnabled(False)
-                # self.dlg2.findChild(QPushButton,"pushButton_migration").setEnabled(False)
                 print "Schema not found"
         except Exception as e:
                 pass
@@ -585,13 +383,8 @@ class ZpboBuilder:
             zsro = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName("t_zsro_" +  zs_refpm.split("_")[2].lower())[0]
             zpbo = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName("t_zpbo_" +  zs_refpm.split("_")[2].lower())[0]
             t_noeud = qgis.core.QgsMapLayerRegistry.instance().mapLayersByName("t_noeud_" +  zs_refpm.split("_")[2].lower())[0]
-
-
-
-            # temp = "D:/Mohannad/NRO55_temp_test/"
             temp = self.temp_folder
             result = self.result_folder
-
         except Exception as e:
             self.fenetreMessage(QMessageBox.Warning, "Erreur_fenetreMessage", str(e))   
                     
@@ -716,8 +509,6 @@ class ZpboBuilder:
 
    
 
-
-
     def create_temp_zsro_table(self, zs_refpm):
         # drop previous version if exists
         query_drop = "DROP TABLE IF EXISTS temp.t_zsro_" +  zs_refpm.split("_")[2] + " CASCADE;"
@@ -777,11 +568,6 @@ class ZpboBuilder:
         uri.setDataSource(schema, table_name, "geom")
 
         vlayer = QgsVectorLayer(uri.uri(False), table_name, "postgres")
-
-        # if not vlayer.isValid():
-        #     self.fenetreMessage(QMessageBox, "Error", "The layer %s is not valid" % vlayer.name())
-        #     return
-
 
         # check first if the layer is already added to the map
         layer_names = [layer.name() for layer in QgsMapLayerRegistry.instance().mapLayers().values()]
